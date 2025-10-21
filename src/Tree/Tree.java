@@ -23,6 +23,49 @@ class BinaryTree {
         return node;
     }
 
+
+     private TreeNode insertRec(TreeNode node, int value) {
+        if (node == null)
+            return new TreeNode(value);
+
+        // Try to fill left first
+        if (node.left == null)
+            node.left = insertRec(node.left, value);
+        else if (node.right == null)
+            node.right = insertRec(node.right, value);
+        else {
+            // Both sides filled — go deeper on the left side
+            node.left = insertRec(node.left, value);
+        }
+
+        return node;
+    }
+
+    void insert(int value) {
+        TreeNode newNode = new TreeNode(value);
+        if (root == null) {
+            root = newNode;
+            return;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+
+            if (temp.left == null) {
+                temp.left = newNode;
+                break;
+            } else queue.add(temp.left);
+
+            if (temp.right == null) {
+                temp.right = newNode;
+                break;
+            } else queue.add(temp.right);
+        }
+    }
+
     // Search for a value
     boolean search(int value) {
         return searchRec(root, value);
