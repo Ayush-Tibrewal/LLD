@@ -130,7 +130,35 @@ class BinaryTree {
         return 1 + Math.max(heightRec(node.left), heightRec(node.right));
     }
 }
+class MakeTree{
+    Tree root;
 
+    public Tree insert(int[] arr) {
+        if (arr.length == 0 || arr[0] == -1) return null;
+
+        root = new Tree(arr[0]);
+        Queue<Tree> q = new LinkedList<>();
+        q.add(root);
+
+        int i = 1;
+        while (!q.isEmpty() && i < arr.length) {
+            Tree curr = q.poll();
+
+            // Left child
+            if (i < arr.length && arr[i] != -1) {
+                curr.left = new Tree(arr[i]);
+                q.add(curr.left);
+            }
+            i++;
+
+            if (i < arr.length && arr[i] != -1) {
+                curr.right = new Tree(arr[i]);
+                q.add(curr.right);
+            }
+            i++;
+        }
+        return root;
+    }
 public class Main {
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
