@@ -182,6 +182,36 @@ class ExitGate {
         int totalCost = (int) (duration * ticket.parkingSpot.price);
         System.out.println("Vehicle " + ticket.vehicle.vehicleNo + " exited.");
         System.out.println("Duration: " + duration + " seconds | Total Cost: ₹" + totalCost);
+        
+        
+    }
+    
+}
+class Bill{
+    PaymentStratergy payment; 
+    boolean ispaid;
+    int transid;
+    int amount;
+    
+    Bill(PaymentStratergy payment , int amount){
+        this.payement = payement;
+        this.amount = amount;
+    }
+    
+    void paytheamount(){
+        payment.payamount();
+        System.out.println("paid the amoutn");
+    }
+}
+
+interface PaymentStratergy{
+    void payamount(int amount);
+}
+
+class Wallet implemenst PaymentStratergy{
+    @Override
+    void payamount(int amount){
+        System.out.println("payment is being done by wallet");
     }
 }
 
